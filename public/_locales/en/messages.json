@@ -1,0 +1,90 @@
+{
+  "appName": {
+    "message": "NyaTab - Anime New Tab",
+    "description": "The name of the extension"
+  },
+  "appDesc": {
+    "message": "A modern, anime-themed browser tab extension with customizable wallpapers and utilities",
+    "description": "The description of the extension"
+  },
+  "settingsTitle": {
+    "message": "Settings",
+    "description": "Title for the settings page"
+  },
+  "themeLabel": {
+    "message": "Theme",
+    "description": "Label for theme selection"
+  },
+  "themeLight": {
+    "message": "Light",
+    "description": "Light theme option"
+  },
+  "themeDark": {
+    "message": "Dark",
+    "description": "Dark theme option"
+  },
+  "shuffleLabel": {
+    "message": "Shuffle Wallpapers",
+    "description": "Label for wallpaper shuffle toggle"
+  },
+  "shuffleEnabled": {
+    "message": "Enabled",
+    "description": "Shuffle enabled status"
+  },
+  "shuffleDisabled": {
+    "message": "Disabled",
+    "description": "Shuffle disabled status"
+  },
+  "refreshIntervalLabel": {
+    "message": "Wallpaper Refresh Interval",
+    "description": "Label for wallpaper refresh interval selection"
+  },
+  "weatherTitle": {
+    "message": "Weather",
+    "description": "Title for weather widget"
+  },
+  "todayLabel": {
+    "message": "Today",
+    "description": "Label for today's weather"
+  },
+  "todoTitle": {
+    "message": "To-Do List",
+    "description": "Title for todo list widget"
+  },
+  "addTaskLabel": {
+    "message": "Add Task",
+    "description": "Label for add task button"
+  },
+  "bookmarksTitle": {
+    "message": "Bookmarks",
+    "description": "Title for bookmarks widget"
+  },
+  "quoteTitle": {
+    "message": "Quote of the Day",
+    "description": "Title for quote widget"
+  },
+  "pomodoroTitle": {
+    "message": "Pomodoro Timer",
+    "description": "Title for pomodoro widget"
+  },
+  "startLabel": {
+    "message": "Start",
+    "description": "Label for start button"
+  },
+  "pauseLabel": {
+    "message": "Pause",
+    "description": "Label for pause button"
+  },
+  "resetLabel": {
+    "message": "Reset",
+    "description": "Label for reset button"
+  },
+  "workLabel": {
+    "message": "Work",
+    "description": "Label for work session"
+  },
+  "breakLabel": {
+    "message": "Break",
+    "description": "Label for break session"
+  }
+} 

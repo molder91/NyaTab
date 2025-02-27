@@ -1,0 +1,90 @@
+{
+  "appName": {
+    "message": "NyaTab - アニメ新タブ",
+    "description": "The name of the extension"
+  },
+  "appDesc": {
+    "message": "モダンなアニメテーマのブラウザタブ拡張機能。カスタマイズ可能な壁紙とユーティリティを提供します。",
+    "description": "The description of the extension"
+  },
+  "settingsTitle": {
+    "message": "設定",
+    "description": "Title for the settings page"
+  },
+  "themeLabel": {
+    "message": "テーマ",
+    "description": "Label for theme selection"
+  },
+  "themeLight": {
+    "message": "ライト",
+    "description": "Light theme option"
+  },
+  "themeDark": {
+    "message": "ダーク",
+    "description": "Dark theme option"
+  },
+  "shuffleLabel": {
+    "message": "壁紙をシャッフル",
+    "description": "Label for wallpaper shuffle toggle"
+  },
+  "shuffleEnabled": {
+    "message": "有効",
+    "description": "Shuffle enabled status"
+  },
+  "shuffleDisabled": {
+    "message": "無効",
+    "description": "Shuffle disabled status"
+  },
+  "refreshIntervalLabel": {
+    "message": "壁紙更新間隔",
+    "description": "Label for wallpaper refresh interval selection"
+  },
+  "weatherTitle": {
+    "message": "天気",
+    "description": "Title for weather widget"
+  },
+  "todayLabel": {
+    "message": "今日",
+    "description": "Label for today's weather"
+  },
+  "todoTitle": {
+    "message": "ToDo リスト",
+    "description": "Title for todo list widget"
+  },
+  "addTaskLabel": {
+    "message": "タスクを追加",
+    "description": "Label for add task button"
+  },
+  "bookmarksTitle": {
+    "message": "ブックマーク",
+    "description": "Title for bookmarks widget"
+  },
+  "quoteTitle": {
+    "message": "今日の名言",
+    "description": "Title for quote widget"
+  },
+  "pomodoroTitle": {
+    "message": "ポモドーロタイマー",
+    "description": "Title for pomodoro widget"
+  },
+  "startLabel": {
+    "message": "開始",
+    "description": "Label for start button"
+  },
+  "pauseLabel": {
+    "message": "一時停止",
+    "description": "Label for pause button"
+  },
+  "resetLabel": {
+    "message": "リセット",
+    "description": "Label for reset button"
+  },
+  "workLabel": {
+    "message": "作業",
+    "description": "Label for work session"
+  },
+  "breakLabel": {
+    "message": "休憩",
+    "description": "Label for break session"
+  }
+} 

@@ -1,0 +1,202 @@
+# NyaTab - Anime-Themed Browser Tab Extension
+## Project Specifications & Development Roadmap
+
+## 1. Project Overview
+NyaTab is a modern, anime-themed browser tab extension for Chrome and Firefox that provides a visually appealing and highly customizable new tab experience. The extension focuses on:
+- Modern UI with anime-inspired design elements
+- Smooth animations and transitions
+- Custom wallpaper functionality from anime sources
+- Useful utilities integrated in an aesthetically pleasing interface
+
+## 2. Technical Specifications
+
+### 2.1 Platform & Architecture
+- **Manifest Version**: Manifest V3 (Chrome & Firefox compatibility)
+- **Frontend Framework**: React with TypeScript for type safety
+- **State Management**: Redux for global state management
+- **Styling**: Tailwind CSS for modern UI components with SCSS for custom animations
+- **Build Tools**: Webpack for bundling, ESLint and Prettier for code quality
+
+### 2.2 Core Features Implementation
+
+#### Wallpaper System
+- Integration with Wallhaven API
+  - Search functionality with anime category filters
+  - SFW content filtering system
+  - Direct image access via API endpoints (https://wallhaven.cc/api/v1/)
+- Integration with Pixiv API (via PixivPy)
+  - OAuth authentication
+  - Trending and popular anime wallpaper access
+  - Artist credit system
+- Local wallpaper management
+  - IndexedDB for storing user wallpaper library
+  - Custom upload functionality with image optimization
+  - Wallpaper categorization and tagging system
+- Wallpaper features:
+  - Browse interface with infinite scroll and gallery view
+  - Detailed wallpaper information page
+  - Direct download capabilities
+  - Add to library functionality
+  - Set as background with instant preview
+  - Random wallpaper rotation (shuffle mode)
+
+#### UI Components
+- **Todo List**
+  - Google Tasks API integration for cross-device sync
+  - Local storage backup when offline
+  - Task categorization and priority system
+  - Due date and reminder functionality
+- **Weather Widget**
+  - Integration with OpenWeatherMap or similar API
+  - Location-based weather data
+  - 5-day forecast option
+  - Customizable units (°C/°F)
+  - Anime-themed weather icons
+- **Bookmarks Management**
+  - Chrome/Firefox bookmarks API integration
+  - Custom bookmark folders with anime-themed icons
+  - Quick access to frequently visited sites
+  - Visual bookmark tiles with custom thumbnails
+- **Custom Bookmarks**
+  - User-defined bookmark system independent of browser bookmarks
+  - Custom icon and color options
+  - Folder organization and categorization
+- **Motivational Quotes**
+  - Database of anime quotes and general motivational content
+  - Random quote generation on tab refresh or timed intervals
+  - Option to save favorite quotes
+- **Pomodoro Timer**
+  - Customizable work/break intervals
+  - Visual and audio notifications
+  - Session tracking and statistics
+  - Anime-themed timer animations
+- **Clock Widget**
+  - Multiple time format options (12/24 hour)
+  - Multiple timezone support
+  - Analog/digital display options
+  - Date display with customizable format
+
+### 2.3 Design Philosophy
+- Rounded corners on all UI elements
+- Subtle shadows for depth and modern feel
+- Anime-inspired color schemes (pastel and vibrant options)
+- Smooth transitions and micro-interactions
+- Cute typography and iconography
+- Responsive design that adapts to any browser window size
+
+## 3. Development Roadmap
+
+### Phase 1: Foundation & Core Infrastructure
+- [✅] Project initialization with Manifest V3 configuration
+- [✅] Setup React, TypeScript, and build pipeline
+- [✅] Create basic extension architecture
+- [✅] Implement core state management
+- [🟡] Design component library with anime-inspired UI elements
+- [✅] Implement basic storage functionality (local and sync)
+
+### Phase 2: Wallpaper System Implementation
+- [✅] Wallhaven API integration
+  - [✅] Basic API connectivity
+  - [✅] Search functionality with anime filters
+  - [✅] Error handling and fallbacks
+  - [✅] Proper parameter formatting for API requests
+- [  ] Pixiv API integration via PixivPy
+- [🟡] Local wallpaper upload and management system
+  - [✅] Basic wallpaper storage
+  - [✅] Wallpaper history tracking
+  - [  ] Categorization system
+- [✅] Wallpaper browser interface
+  - [✅] Grid view of wallpapers
+  - [✅] Search functionality
+  - [✅] Pagination controls
+- [✅] Detailed wallpaper view with metadata
+- [🟡] Library management system
+  - [✅] Basic favorites functionality
+  - [  ] Advanced organization tools
+- [✅] Wallpaper shuffle functionality
+  - [✅] Random wallpaper selection
+  - [✅] Refresh button with loading state
+  - [✅] Auto-refresh based on interval
+
+### Phase 3: UI Components Development
+- [✅] Clock widget with customization options
+- [  ] Weather widget with API integration
+- [✅] Todo list with Google Tasks synchronization
+- [  ] Browser bookmarks integration
+- [  ] Custom bookmarks system
+- [  ] Motivational quotes feature
+- [  ] Pomodoro timer implementation
+
+### Phase 4: UI Refinement & Customization
+- [🟡] Theme customization system
+  - [✅] Light/dark/system theme support
+  - [  ] Custom color schemes
+- [  ] Layout customization options
+- [🟡] Advanced animation and transition effects
+- [  ] Widget positioning and resizing capabilities
+- [✅] User preferences storage and sync
+
+### Phase 5: Testing & Optimization
+- [🟡] Cross-browser compatibility testing
+- [🟡] Performance optimization
+  - [✅] Improved error handling
+  - [✅] Enhanced API reliability
+  - [  ] Bundle size optimization
+- [  ] Memory usage optimization
+- [  ] Battery impact analysis and improvements
+- [  ] Load time optimization
+
+### Phase 6: Finalization & Deployment
+- [  ] Final QA and bug fixes
+- [  ] Documentation completion
+- [  ] Chrome Web Store submission
+- [  ] Firefox Add-ons submission
+- [  ] Post-launch monitoring and support
+
+## 4. Browser Extension Technical Requirements
+
+### Chrome Extension
+- Use Manifest V3 structure
+- Service Worker for background tasks
+- Chrome Storage API for data persistence
+- Chrome Bookmarks API integration
+- Permissions optimization for better user trust
+
+### Firefox Extension
+- Compatible Manifest V3 implementation
+- Firefox-specific polyfills where needed
+- Browser Storage API abstraction
+- Firefox Add-on policies compliance
+
+## 5. Security Considerations
+- Content Security Policy implementation
+- No remotely hosted code (all assets packaged with extension)
+- Secure API key management
+- User data protection and privacy
+- Regular security audits
+
+## 6. Current Development Status (Updated)
+We have successfully completed Phase 1 and made significant progress on Phase 2:
+
+### Completed:
+- Basic extension architecture with Manifest V3
+- React, TypeScript, and Webpack build pipeline
+- Core state management with Redux
+- Storage service for managing user data
+- Wallhaven API integration with proper error handling
+- Wallpaper browser interface with search and pagination
+- Wallpaper rotation and refresh functionality
+- Basic UI components (Clock, Todo, Header)
+
+### In Progress:
+- Advanced wallpaper management features
+- UI refinement and error state handling
+- Performance improvements for API requests
+
+### Next Steps:
+1. Complete remaining Wallpaper System features
+2. Begin implementing additional UI components from Phase 3
+3. Enhance error handling and user feedback mechanisms
+4. Improve overall UI polish and animations
+
+This roadmap will be updated regularly as development progresses to reflect completed tasks and any adjustments to the project scope or implementation details.

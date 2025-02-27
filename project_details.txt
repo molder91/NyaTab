@@ -1,0 +1,22 @@
+Nyatab is a new generation tab extension that can run on chromium and firefox browser.
+Nyatab offers a modern and anime tab ui design and smooth animations.
+- the ui is highly customizable
+- the ui uses rounded corners and smooth animations, and light shadows to provide a modern style
+- the ui uses cute text and content for overall theme
+Nyatab offers wallpapers from popular anime wallpaper sites such as wallhaven and pixiv.
+- User can also upload their own wallpapers
+- User can set wallpapers from wallhaven and pixiv from wallhaven api and pixivpy api 
+- User can view wallpapers from wallhaven and pixiv from the browse page
+- User can view the details of the wallpapers, or downlod the wallpaper to the computer, or add the wallpaper to library, or directly set the wallpaper as the background (also add to the library)
+- User can also upload their wallpapers on their computer to the library
+- User can use the shuffle function so that whenever the user opens a new tab, a random wallpaper from the library would appear.
+
+Nyatab offers the following functions for tabs
+- Todo list (Sync with Google Task)
+- Weather
+- Bookmarks from the browser
+- Custom Bookmarks
+- random motivational quotes
+- Promodo timer
+- Current time
+all of these functions are highly customizable.
