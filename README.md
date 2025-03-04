@@ -100,4 +100,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - [Wallhaven](https://wallhaven.cc/) for providing the wallpaper API
 - [React](https://reactjs.org/) for the UI library
 - [Redux](https://redux.js.org/) for state management
-- [Tailwind CSS](https://tailwindcss.com/) for styling 
+- [Tailwind CSS](https://tailwindcss.com/) for styling # NyaTab
