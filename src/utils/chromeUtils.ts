@@ -2,6 +2,7 @@
  * Utility functions for working with Chrome extension APIs
  */
 import { error } from './errorHandling';
+import { logError } from './errorUtils';
 
 /**
  * Opens a URL in a new tab
@@ -86,39 +87,97 @@ export const getActiveTab = (): Promise<chrome.tabs.Tab> => {
 };
 
 /**
- * Checks if the extension has the specified permissions
- * @param permissions Permissions to check
- * @returns Promise that resolves with whether the permissions are granted
+ * Check if the extension has the required permissions
  */
-export const hasPermissions = (permissions: string[]): Promise<boolean> => {
-  return new Promise((resolve) => {
-    try {
-      chrome.permissions.contains({ permissions }, (result) => {
-        resolve(result);
-      });
-    } catch (err) {
-      error('Failed to check permissions', err);
-      resolve(false);
-    }
-  });
+export const checkPermissions = async (permissions: chrome.permissions.Permissions): Promise<boolean> => {
+  try {
+    return await chrome.permissions.contains(permissions);
+  } catch (error) {
+    logError('Failed to check permissions', error);
+    return false;
+  }
 };
 
 /**
- * Requests the specified permissions
- * @param permissions Permissions to request
- * @returns Promise that resolves with whether the permissions were granted
+ * Request required permissions from the user
  */
-export const requestPermissions = (permissions: string[]): Promise<boolean> => {
-  return new Promise((resolve) => {
-    try {
-      chrome.permissions.request({ permissions }, (granted) => {
-        resolve(granted);
-      });
-    } catch (err) {
-      error('Failed to request permissions', err);
-      resolve(false);
+export const requestPermissions = async (permissions: chrome.permissions.Permissions): Promise<boolean> => {
+  try {
+    return await chrome.permissions.request(permissions);
+  } catch (error) {
+    logError('Failed to request permissions', error);
+    return false;
+  }
+};
+
+/**
+ * Get all granted permissions
+ */
+export const getGrantedPermissions = async (): Promise<chrome.permissions.Permissions> => {
+  try {
+    return await chrome.permissions.getAll();
+  } catch (error) {
+    logError('Failed to get granted permissions', error);
+    return { permissions: [], origins: [] };
+  }
+};
+
+/**
+ * Remove granted permissions
+ */
+export const removePermissions = async (permissions: chrome.permissions.Permissions): Promise<boolean> => {
+  try {
+    return await chrome.permissions.remove(permissions);
+  } catch (error) {
+    logError('Failed to remove permissions', error);
+    return false;
+  }
+};
+
+/**
+ * Check if the extension has all required permissions
+ */
+export const hasAllRequiredPermissions = async (requiredPermissions: chrome.permissions.Permissions): Promise<boolean> => {
+  try {
+    const granted = await getGrantedPermissions();
+    
+    // Check permissions
+    if (requiredPermissions.permissions) {
+      const hasAllPermissions = requiredPermissions.permissions.every(
+        permission => granted.permissions?.includes(permission)
+      );
+      if (!hasAllPermissions) return false;
     }
-  });
+    
+    // Check origins
+    if (requiredPermissions.origins) {
+      const hasAllOrigins = requiredPermissions.origins.every(
+        origin => granted.origins?.includes(origin)
+      );
+      if (!hasAllOrigins) return false;
+    }
+    
+    return true;
+  } catch (error) {
+    logError('Failed to check all required permissions', error);
+    return false;
+  }
+};
+
+/**
+ * Request all required permissions if not already granted
+ */
+export const ensurePermissions = async (requiredPermissions: chrome.permissions.Permissions): Promise<boolean> => {
+  try {
+    const hasPermissions = await hasAllRequiredPermissions(requiredPermissions);
+    if (!hasPermissions) {
+      return await requestPermissions(requiredPermissions);
+    }
+    return true;
+  } catch (error) {
+    logError('Failed to ensure permissions', error);
+    return false;
+  }
 };
 
 /**

@@ -32,11 +32,12 @@
   "permissions": [
     "storage",
     "bookmarks",
-    "alarms"
+    "alarms",
+    "tabs",
+    "runtime"
   ],
   "optional_permissions": [
-    "geolocation",
-    "tabs"
+    "geolocation"
   ],
   "host_permissions": [
     "https://wallhaven.cc/api/*"

@@ -6,7 +6,7 @@ const Options: React.FC = () => {
   return (
     <Layout>
       <div className="p-4">
-        <Settings />
+        <Settings onClose={() => window.close()} />
       </div>
     </Layout>
   );

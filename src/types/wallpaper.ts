@@ -5,20 +5,31 @@
 /**
  * Source type for wallpapers
  */
-export type WallpaperSourceType = 'wallhaven' | 'pixiv' | 'local';
+export type WallpaperSourceType = 'local' | 'remote';
 
 /**
  * Interface for wallpaper objects
  */
+export interface WallpaperInfo {
+  title: string;
+  source: string;
+  uploadDate: string;
+  fileSize?: number;
+  mimeType?: string;
+  description?: string;
+  tags?: string[];
+}
+
 export interface Wallpaper {
   id: string;
   path: string;
-  source?: string;
-  sourceType: WallpaperSourceType;
-  thumbnail?: string;
-  resolution?: string;
-  info?: string;
-  addedAt: string;
+  source: string;  // URL or source of the wallpaper
+  sourceType: 'local' | 'remote';
+  thumbnail: string;
+  resolution: string;
+  info: WallpaperInfo;
+  addedAt?: string;
+  isFavorite?: boolean;
 }
 
 /**

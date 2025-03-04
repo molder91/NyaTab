@@ -59,10 +59,13 @@ const storageService = {
    */
   saveCurrentWallpaper: async (wallpaper: Wallpaper): Promise<void> => {
     try {
+      console.log('Saving current wallpaper to storage:', wallpaper.id);
       await chrome.storage.local.set({ [STORAGE_KEYS.CURRENT_WALLPAPER]: wallpaper });
       
-      // Also add to library if it's not already there
-      if (wallpaper.sourceType === 'local') {
+      // Only add local wallpapers to library automatically (user uploaded)
+      // Remote wallpapers should only be added when user explicitly adds them
+      if (wallpaper.sourceType === 'local' && wallpaper.source === 'local_upload') {
+        console.log('Local uploaded wallpaper - adding to library automatically');
         await storageService.addToLibrary(wallpaper);
       }
     } catch (error) {
@@ -97,14 +100,17 @@ const storageService = {
   },
   
   /**
-   * Gets wallpaper library from storage
+   * Gets the library of wallpapers
    */
   getLibrary: async (): Promise<Wallpaper[]> => {
     try {
+      console.log('Retrieving library from storage...');
       const result = await chrome.storage.local.get(STORAGE_KEYS.LIBRARY);
-      return result[STORAGE_KEYS.LIBRARY] || [];
+      const library = result[STORAGE_KEYS.LIBRARY] || [];
+      console.log(`Retrieved library with ${library.length} wallpapers`);
+      return library;
     } catch (error) {
-      logError('Failed to get wallpaper library from storage', error);
+      console.error('Failed to get library:', error);
       return [];
     }
   },
@@ -126,19 +132,71 @@ const storageService = {
    */
   addToLibrary: async (wallpaper: Wallpaper): Promise<void> => {
     try {
+      console.log('Storage: Adding wallpaper to library:', wallpaper.id);
+      
+      // Get current library
       const library = await storageService.getLibrary();
       
-      // Check if wallpaper already exists
-      const exists = library.some(w => w.id === wallpaper.id);
+      // Check if wallpaper is already in library
+      if (library.some(w => w.id === wallpaper.id)) {
+        console.log('Wallpaper already exists in library:', wallpaper.id);
+        return; // Skip adding if already exists
+      }
       
-      if (!exists) {
-        // Add to beginning of library
-        library.unshift(wallpaper);
-        await storageService.saveLibrary(library);
+      // Check size of wallpaper before adding
+      const wallpaperSize = JSON.stringify(wallpaper).length;
+      const estimatedSize = Math.round(wallpaperSize / 1024);
+      console.log(`Wallpaper size: ~${estimatedSize}KB`);
+      
+      // Warn if wallpaper is large (may hit quota)
+      if (estimatedSize > 1024) { // > 1MB
+        console.warn(`Large wallpaper detected (${estimatedSize}KB), may approach storage quota`);
+      }
+      
+      // Add to library
+      const updatedLibrary = [wallpaper, ...library];
+      
+      // Try to save to storage
+      try {
+        await storageService.saveLibrary(updatedLibrary);
+        console.log('Successfully added wallpaper to library in storage:', wallpaper.id);
+      } catch (error) {
+        if (error instanceof Error && error.message.includes('quota')) {
+          console.error('Storage quota exceeded when adding to library');
+          
+          // Try to save a compressed version
+          if (wallpaper.path && wallpaper.path.startsWith('data:image')) {
+            console.log('Attempting to compress wallpaper before saving');
+            try {
+              // Create a more compressed thumbnail instead of the full image
+              if (wallpaper.thumbnail) {
+                console.log('Using thumbnail as main image to save space');
+                wallpaper.path = wallpaper.thumbnail;
+                
+                // Try to save again with smaller image
+                await storageService.saveLibrary([wallpaper, ...library]);
+                console.log('Successfully saved compressed version to library');
+                return;
+              }
+            } catch (compressionError) {
+              console.error('Failed to save compressed version:', compressionError);
+            }
+          }
+          
+          throw new Error('Storage quota exceeded. Try removing some wallpapers from your library.');
+        }
+        
+        throw error; // Re-throw other errors
       }
     } catch (error) {
-      logError('Failed to add wallpaper to library', error);
-      throw error;
+      console.error('Failed to add wallpaper to library in storage:', error);
+      
+      // Format error message for user display
+      const errorMessage = error instanceof Error 
+        ? error.message 
+        : 'Unknown storage error';
+      
+      throw new Error(`Failed to add to library: ${errorMessage}`);
     }
   },
   
@@ -147,11 +205,23 @@ const storageService = {
    */
   removeFromLibrary: async (wallpaperId: string): Promise<void> => {
     try {
+      console.log('Removing wallpaper from library:', wallpaperId);
+      
+      // Get existing library
       const library = await storageService.getLibrary();
+      
+      // Remove wallpaper from library
       const updatedLibrary = library.filter(w => w.id !== wallpaperId);
-      await storageService.saveLibrary(updatedLibrary);
+      
+      if (library.length === updatedLibrary.length) {
+        console.warn('Wallpaper not found in library:', wallpaperId);
+      }
+      
+      // Save updated library
+      await chrome.storage.local.set({ [STORAGE_KEYS.LIBRARY]: updatedLibrary });
+      console.log(`Saved library with ${updatedLibrary.length} wallpapers (removed ${wallpaperId})`);
     } catch (error) {
-      logError('Failed to remove wallpaper from library', error);
+      console.error('Failed to remove wallpaper from library:', error);
       throw error;
     }
   },

@@ -1,0 +1,18 @@
+{
+  "appName": {
+    "message": "NyaTab",
+    "description": "The name of the extension"
+  },
+  "appDescription": {
+    "message": "A beautiful new tab page with anime-inspired design",
+    "description": "The description of the extension"
+  },
+  "settingsSaved": {
+    "message": "Settings saved successfully",
+    "description": "Message shown when settings are saved"
+  },
+  "settingsSaveError": {
+    "message": "Error saving settings",
+    "description": "Message shown when settings fail to save"
+  }
+} 

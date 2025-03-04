@@ -46,4 +46,22 @@
   .input {
     @apply px-4 py-2 rounded-xl border-2 border-gray-200 focus:border-primary focus:outline-none transition-all duration-200;
   }
+}
+
+@layer utilities {
+  /* Add animation for notifications */
+  @keyframes slide-in-right {
+    0% {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  .animate-slide-in-right {
+    animation: slide-in-right 0.3s ease-out forwards;
+  }
 } 
